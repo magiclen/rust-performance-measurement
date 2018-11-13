@@ -1,0 +1,31 @@
+[package]
+name = "rust-performance-measurement"
+version = "0.1.0"
+authors = ["Magic Len <len@magiclen.org>"]
+readme = "README.md"
+license = "MIT"
+
+[dependencies]
+
+[dev-dependencies]
+criterion = "0.2.5"
+
+[[bench]]
+name = "vec_box_array"
+harness = false
+
+[[bench]]
+name = "for_iterator"
+harness = false
+
+[[bench]]
+name = "push_str_write_fmt"
+harness = false
+
+[[bench]]
+name = "one_char_push"
+harness = false
+
+[[bench]]
+name = "one_char_write"
+harness = false
