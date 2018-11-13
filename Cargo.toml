@@ -2,6 +2,7 @@
 name = "rust-performance-measurement"
 version = "0.1.0"
 authors = ["Magic Len <len@magiclen.org>"]
+description= "How to write a high-performance program in Rust?"
 readme = "README.md"
 license = "MIT"
 
