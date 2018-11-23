@@ -62,7 +62,7 @@ To compare the performance between `string.push_str("c")` and `string.push('c')`
 cargo bench --bench one_char_push
 ```
 
-The result shows that `string.push('c')` is better than `string.push_str("c")`.
+The result shows that `string.push('c')` is better than `string.push_str("c")` when the char is 1 byte in UTF-8.
 
 ## The One-Char-Write Performance Measurement
 
@@ -72,7 +72,7 @@ To compare the performance between `formatter.write_str("c")` and `formatter.wri
 cargo bench --bench one_char_write
 ```
 
-The result shows that `formatter.write_char('c')` is better than `formatter.write_str("c")`.
+The result shows that `formatter.write_char('c')` is better than `formatter.write_str("c")` when the char is 1 byte in UTF-8.
 
 ## License
 
