@@ -9,7 +9,7 @@ license = "MIT"
 [dependencies]
 
 [dev-dependencies]
-criterion = "0.2.5"
+criterion = "0.2.6"
 
 [[bench]]
 name = "vec_box_array"
@@ -29,4 +29,8 @@ harness = false
 
 [[bench]]
 name = "one_char_write"
+harness = false
+
+[[bench]]
+name = "const_static_value"
 harness = false
