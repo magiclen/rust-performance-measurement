@@ -61,6 +61,7 @@ fn static_int_sum(c: &mut Criterion) {
 
                 for _ in 1..10000 {
                     sum += STATIC_INT_VALUE;
+                    sum += STATIC_INT_VALUE;
                 }
 
                 unsafe {
@@ -79,6 +80,7 @@ fn const_int_sum(c: &mut Criterion) {
                 let mut sum = 0;
 
                 for _ in 1..10000 {
+                    sum += CONST_INT_VALUE;
                     sum += CONST_INT_VALUE;
                 }
 
@@ -99,6 +101,7 @@ fn static_int_array_sum(c: &mut Criterion) {
 
                 for i in 1..200 {
                     sum += STATIC_INT_ARRAY[i];
+                    sum += STATIC_INT_ARRAY[i];
                 }
 
                 unsafe {
@@ -117,6 +120,7 @@ fn const_int_array_sum(c: &mut Criterion) {
                 let mut sum = 0;
 
                 for i in 1..200 {
+                    sum += CONST_INT_ARRAY[i];
                     sum += CONST_INT_ARRAY[i];
                 }
 
