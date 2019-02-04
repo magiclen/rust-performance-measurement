@@ -12,15 +12,11 @@ license = "MIT"
 criterion = "0.2.6"
 
 [[bench]]
-name = "vec_box_array"
+name = "const_static_value"
 harness = false
 
 [[bench]]
 name = "for_iterator"
-harness = false
-
-[[bench]]
-name = "push_str_write_fmt"
 harness = false
 
 [[bench]]
@@ -32,5 +28,9 @@ name = "one_char_write"
 harness = false
 
 [[bench]]
-name = "const_static_value"
+name = "push_str_write_fmt"
+harness = false
+
+[[bench]]
+name = "vec_box_array"
 harness = false
