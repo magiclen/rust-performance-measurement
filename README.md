@@ -41,15 +41,25 @@ cargo bench --bench iter_enumerate
 
 The performance is about the same.
 
-## The Iterator-Skip-Take Performance Measurement
+## The Iterator-Skip Performance Measurement
 
-To compare the performance between **ranged slices** and **Skip and Take iterators**.
+To compare the performance between **ranged slices** and **Skip iterators**.
 
 ```bash
-cargo bench --bench iter_skip_take
+cargo bench --bench iter_skip
 ```
 
-**Ranged slices** are much better than **Skip and Take iterators**.
+**Ranged slices** are much better than **Skip iterators**.
+
+## The Iterator-Take Performance Measurement
+
+To compare the performance between **ranged slices** and **Take iterators**.
+
+```bash
+cargo bench --bench iter_take
+```
+
+The performance is about the same.
 
 ## The One-Char-Push Performance Measurement
 

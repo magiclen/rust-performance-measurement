@@ -1,6 +1,6 @@
 [package]
 name = "rust-performance-measurement"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Magic Len <len@magiclen.org>"]
 description= "How to write a high-performance program in Rust?"
 readme = "README.md"
@@ -24,7 +24,11 @@ name = "iter_enumerate"
 harness = false
 
 [[bench]]
-name = "iter_skip_take"
+name = "iter_skip"
+harness = false
+
+[[bench]]
+name = "iter_take"
 harness = false
 
 [[bench]]

@@ -28,17 +28,16 @@ static STATIC_INT_ARRAY: [u64; 200] = [
     0xD520, 0xDAA0, 0x6B50, 0x56D0, 0x4AE0, 0xA4E8, 0xA4D0, 0xD150, 0xD928, 0xD520,
 ];
 
-const FROM: usize = 50;
 const END: usize = 150;
 
 fn range(c: &mut Criterion) {
     c.bench(
-        "iter_skip_take",
+        "iter_take",
         Benchmark::new("range", move |b| {
             b.iter(|| {
                 let mut sum = 0;
 
-                for &n in STATIC_INT_ARRAY[FROM..END].iter() {
+                for &n in STATIC_INT_ARRAY[..END].iter() {
                     sum += n;
                 }
 
@@ -50,14 +49,14 @@ fn range(c: &mut Criterion) {
     );
 }
 
-fn skip_take(c: &mut Criterion) {
+fn take(c: &mut Criterion) {
     c.bench(
-        "iter_skip_take",
-        Benchmark::new("skip_take", move |b| {
+        "iter_take",
+        Benchmark::new("take", move |b| {
             b.iter(|| {
                 let mut sum = 0;
 
-                for &n in STATIC_INT_ARRAY.iter().skip(FROM).take(END - FROM + 1) {
+                for &n in STATIC_INT_ARRAY.iter().take(END - 1) {
                     sum += n;
                 }
 
@@ -69,6 +68,6 @@ fn skip_take(c: &mut Criterion) {
     );
 }
 
-criterion_group!(iter_skip_take, range, skip_take);
+criterion_group!(iter_take, range, take);
 
-criterion_main!(iter_skip_take);
+criterion_main!(iter_take);
