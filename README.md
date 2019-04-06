@@ -31,6 +31,26 @@ And so what? The result indicates that,
 1. If your array is in heaps, you should avoid using **for loops** on it.
 1. If your array is actually a slice, you should avoid using **for loops** on it.
 
+## The Iterator-Enumerate Performance Measurement
+
+To compare the performance between **for loops** and **Enumerate iterators**.
+
+```bash
+cargo bench --bench iter_enumerate
+```
+
+The performance is about the same.
+
+## The Iterator-Skip-Take Performance Measurement
+
+To compare the performance between **ranged slices** and **Skip and Take iterators**.
+
+```bash
+cargo bench --bench iter_skip_take
+```
+
+**Ranged slices** are much better than **Skip and Take iterators**.
+
 ## The One-Char-Push Performance Measurement
 
 To compare the performance between `string.push_str("c")` and `string.push('c')`.
