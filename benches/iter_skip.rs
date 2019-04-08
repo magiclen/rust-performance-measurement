@@ -37,6 +37,25 @@ fn range(c: &mut Criterion) {
             b.iter(|| {
                 let mut sum = 0;
 
+                for i in FROM..STATIC_INT_ARRAY.len() {
+                    sum += STATIC_INT_ARRAY[i];
+                }
+
+                unsafe {
+                    RESULT = sum;
+                }
+            });
+        }),
+    );
+}
+
+fn range_skip(c: &mut Criterion) {
+    c.bench(
+        "iter_skip",
+        Benchmark::new("range_skip", move |b| {
+            b.iter(|| {
+                let mut sum = 0;
+
                 for &n in STATIC_INT_ARRAY[FROM..].iter() {
                     sum += n;
                 }
@@ -68,6 +87,6 @@ fn skip(c: &mut Criterion) {
     );
 }
 
-criterion_group!(iter_skip, range, skip);
+criterion_group!(iter_skip, range, range_skip, skip);
 
 criterion_main!(iter_skip);

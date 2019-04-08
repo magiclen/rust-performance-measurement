@@ -37,6 +37,25 @@ fn range(c: &mut Criterion) {
             b.iter(|| {
                 let mut sum = 0;
 
+                for i in 0..END {
+                    sum += STATIC_INT_ARRAY[i];
+                }
+
+                unsafe {
+                    RESULT = sum;
+                }
+            });
+        }),
+    );
+}
+
+fn range_skip(c: &mut Criterion) {
+    c.bench(
+        "iter_take",
+        Benchmark::new("range_skip", move |b| {
+            b.iter(|| {
+                let mut sum = 0;
+
                 for &n in STATIC_INT_ARRAY[..END].iter() {
                     sum += n;
                 }
@@ -56,7 +75,7 @@ fn take(c: &mut Criterion) {
             b.iter(|| {
                 let mut sum = 0;
 
-                for &n in STATIC_INT_ARRAY.iter().take(END - 1) {
+                for &n in STATIC_INT_ARRAY.iter().take(END) {
                     sum += n;
                 }
 
@@ -68,6 +87,6 @@ fn take(c: &mut Criterion) {
     );
 }
 
-criterion_group!(iter_take, range, take);
+criterion_group!(iter_take, range, range_skip, take);
 
 criterion_main!(iter_take);
