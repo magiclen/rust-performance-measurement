@@ -1,6 +1,16 @@
 Rust Performance Measurement
 ====================
 
+## The Atomic-Mutex Performance Measurement
+
+To compare the performance between `AtomicXX` and `Mutex<XX>`.
+
+```bash
+cargo bench --bench atomic_mutex
+```
+
+The result indicates that `AtomicXX` is faster than `Mutex<XX>`.
+
 ## The Const-Static-Value Performance Measurement
 
 To compare the performance between **const** variables and **static** variables for scalar types and arrays.
@@ -114,6 +124,7 @@ The **with_box_2** is also the `Box<[u8; size]>` type, but its instance is creat
 
 Overall, if you need a buffer, the `[u8; size]` type is the best option. If you need an array in heaps, there is no need to make it fixed-size.
 
+AtomicXX beats 
 
 ## License
 

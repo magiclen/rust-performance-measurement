@@ -1,6 +1,6 @@
 [package]
 name = "rust-performance-measurement"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Magic Len <len@magiclen.org>"]
 description= "How to write a high-performance program in Rust?"
 readme = "README.md"
@@ -10,6 +10,10 @@ license = "MIT"
 
 [dev-dependencies]
 criterion = "0.2.6"
+
+[[bench]]
+name = "atomic_mutex"
+harness = false
 
 [[bench]]
 name = "const_static_value"
