@@ -19,7 +19,7 @@ fn atomic(c: &mut Criterion) {
             let number = AtomicU64::new(0);
 
             b.iter(|| {
-                number.fetch_add(1, Ordering::SeqCst)
+                number.fetch_add(1, Ordering::SeqCst);
             });
         }),
     );
