@@ -9,7 +9,7 @@ To compare the performance between `AtomicXX` and `Mutex<XX>`.
 cargo bench --bench atomic_mutex
 ```
 
-The result indicates that `AtomicXX` is faster than `Mutex<XX>`.
+The result indicates that `AtomicXX` is faster than `Mutex<XX>` (about four times).
 
 ## The Const-Static-Value Performance Measurement
 
