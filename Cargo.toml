@@ -1,6 +1,6 @@
 [package]
 name = "rust-performance-measurement"
-version = "0.2.2"
+version = "0.2.3"
 authors = ["Magic Len <len@magiclen.org>"]
 description= "How to write a high-performance program in Rust?"
 readme = "README.md"
