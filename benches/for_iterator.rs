@@ -157,7 +157,23 @@ fn for_iterator_loop_heap_slice(bencher: &mut Bencher) {
     });
 }
 
-benchmark_group!(stack, for_loop_stack, for_loop_stack_slice, iterator_stack, iterator_stack_slice, for_iterator_loop_stack, for_iterator_loop_stack_slice);
-benchmark_group!(heap, for_loop_heap, for_loop_heap_slice, iterator_heap, iterator_heap_slice, for_iterator_loop_heap, for_iterator_loop_heap_slice);
+benchmark_group!(
+    stack,
+    for_loop_stack,
+    for_loop_stack_slice,
+    iterator_stack,
+    iterator_stack_slice,
+    for_iterator_loop_stack,
+    for_iterator_loop_stack_slice
+);
+benchmark_group!(
+    heap,
+    for_loop_heap,
+    for_loop_heap_slice,
+    iterator_heap,
+    iterator_heap_slice,
+    for_iterator_loop_heap,
+    for_iterator_loop_heap_slice
+);
 
 benchmark_main!(stack, heap);

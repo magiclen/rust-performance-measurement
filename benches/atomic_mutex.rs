@@ -3,13 +3,13 @@ extern crate bencher;
 
 use bencher::Bencher;
 
-use std::sync::atomic::{Ordering, AtomicU64};
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Mutex;
 
 const MULTIPLE_COUNTER_NUMBER: usize = 4;
 
 struct Counter {
-    count: u64
+    count: u64,
 }
 
 fn atomic(bencher: &mut Bencher) {
@@ -22,7 +22,7 @@ fn atomic(bencher: &mut Bencher) {
 
 fn mutex(bencher: &mut Bencher) {
     let number = Mutex::new(Counter {
-        count: 0
+        count: 0,
     });
 
     bencher.iter(|| {
@@ -49,7 +49,7 @@ fn mutex_multiple(bencher: &mut Bencher) {
 
     for _ in 0..MULTIPLE_COUNTER_NUMBER {
         numbers.push(Counter {
-            count: 0
+            count: 0,
         });
     }
 

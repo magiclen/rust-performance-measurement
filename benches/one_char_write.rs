@@ -69,7 +69,6 @@ fn write_char_ext(bencher: &mut Bencher) {
     });
 }
 
-
-benchmark_group!(one_char_write, write_str, write_char, write_str_ext,write_char_ext );
+benchmark_group!(one_char_write, write_str, write_char, write_str_ext, write_char_ext);
 
 benchmark_main!(one_char_write);

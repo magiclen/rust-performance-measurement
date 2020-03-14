@@ -22,9 +22,7 @@ fn with_box(bencher: &mut Bencher) {
 
         let a = v.into_boxed_slice();
 
-        unsafe {
-            Box::from_raw(Box::into_raw(a) as *mut [u8; ARRAY_SIZE])
-        }
+        unsafe { Box::from_raw(Box::into_raw(a) as *mut [u8; ARRAY_SIZE]) }
     };
 
     bencher.iter(|| {
@@ -77,9 +75,7 @@ fn alloc_with_box(bencher: &mut Bencher) {
 
             let a = v.into_boxed_slice();
 
-            unsafe {
-                Box::from_raw(Box::into_raw(a) as *mut [u8; ARRAY_SIZE])
-            }
+            unsafe { Box::from_raw(Box::into_raw(a) as *mut [u8; ARRAY_SIZE]) }
         };
 
         unsafe {
@@ -119,6 +115,13 @@ fn alloc_with_vec_to_box(bencher: &mut Bencher) {
 }
 
 benchmark_group!(modify, no_box, with_box, with_box_2, with_vec, with_vec_to_box);
-benchmark_group!(allocation, alloc_no_box, alloc_with_box, alloc_with_box_2, alloc_with_vec, alloc_with_vec_to_box);
+benchmark_group!(
+    allocation,
+    alloc_no_box,
+    alloc_with_box,
+    alloc_with_box_2,
+    alloc_with_vec,
+    alloc_with_vec_to_box
+);
 
 benchmark_main!(allocation, modify);

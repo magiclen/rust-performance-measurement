@@ -10,6 +10,7 @@ license = "MIT"
 
 [dev-dependencies]
 bencher = "0.1.5"
+random-integer = "1.1.1"
 
 [[bench]]
 name = "atomic_mutex"
@@ -17,6 +18,10 @@ harness = false
 
 [[bench]]
 name = "const_static_value"
+harness = false
+
+[[bench]]
+name = "contains_binary_search"
 harness = false
 
 [[bench]]

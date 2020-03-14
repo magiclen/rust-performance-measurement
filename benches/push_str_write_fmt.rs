@@ -23,7 +23,6 @@ fn write_fmt(bencher: &mut Bencher) {
     });
 }
 
-
 benchmark_group!(push_str_write_fmt, push_str, write_fmt);
 
 benchmark_main!(push_str_write_fmt);

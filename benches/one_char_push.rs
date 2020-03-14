@@ -35,7 +35,6 @@ fn push_ext(bencher: &mut Bencher) {
     });
 }
 
-
 benchmark_group!(one_char_push, push_str, push, push_str_ext, push_ext);
 
 benchmark_main!(one_char_push);

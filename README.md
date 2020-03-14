@@ -21,6 +21,18 @@ cargo bench --bench const_static_value
 
 The result indicates that, with compiler optimization, const and static variables have (almost) the same performance.
 
+## The Contains-Binary-Search Performance Measurement
+
+To compare the performance between the **contains** method and the **binary_search** for determining whether an element is in an sorted array.
+
+```bash
+cargo bench --bench contains_binary_search
+```
+
+For elements whose type is primitive, if the length of an array is smaller than **32** or so, the **contains** method has better performance.
+
+For non-primitive data type, it depends on how elements be compared with each other. The threshold should be smaller than **32** or so because the comparison between elements in primitive types is very fast.
+
 ## The For-Iterator Performance Measurement
 
 To compare the performance among **for loops**, **for-iterator loops** and **iterators** for arrays in stacks or heaps and their slices.
