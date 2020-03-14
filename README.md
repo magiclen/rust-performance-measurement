@@ -118,7 +118,8 @@ The performance ranks of allocation are,
 The performance ranks of storing and retrieving are,
 
 1. no_box
-1. with_box, with_box_2, with_vec, with_vec_to_box
+1. with_box, with_box_2, with_vec
+1. with_vec_to_box
 
 The **with_box_2** is also the `Box<[u8; size]>` type, but its instance is created by a way which is something like `Box::new([u8; size])`. Even though `Box` aims to allocate memory space in heaps, the statement `Box::new([u8; size])` still needs **size**-bytes space in stacks to initialize the `[u8; size]` instance, and after that, `Box` creates another space in heaps to store the initialized `[u8; size]`. This way to create a `Box<[u8; size]>` instance is slow and still can cause a stack overflow.
 

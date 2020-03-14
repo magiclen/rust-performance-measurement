@@ -1,9 +1,7 @@
 #[macro_use]
-extern crate criterion;
+extern crate bencher;
 
-use criterion::{Criterion, Benchmark};
-
-static mut RESULT: u64 = 0;
+use bencher::Bencher;
 
 static STATIC_INT_ARRAY: [u64; 200] = [
     0x4AE0, 0xA570, 0x5268, 0xD260, 0xD950, 0x6AA8, 0x56A0, 0x9AD0, 0x4AE8, 0x4AE0,
@@ -30,63 +28,42 @@ static STATIC_INT_ARRAY: [u64; 200] = [
 
 const END: usize = 150;
 
-fn range(c: &mut Criterion) {
-    c.bench(
-        "iter_take",
-        Benchmark::new("range", move |b| {
-            b.iter(|| {
-                let mut sum = 0;
+fn range(bencher: &mut Bencher) {
+    bencher.iter(|| {
+        let mut sum = 0;
 
-                for i in 0..END {
-                    sum += STATIC_INT_ARRAY[i];
-                }
+        for i in 0..END {
+            sum += STATIC_INT_ARRAY[i];
+        }
 
-                unsafe {
-                    RESULT = sum;
-                }
-            });
-        }),
-    );
+        sum
+    });
 }
 
-fn range_skip(c: &mut Criterion) {
-    c.bench(
-        "iter_take",
-        Benchmark::new("range_skip", move |b| {
-            b.iter(|| {
-                let mut sum = 0;
+fn range_skip(bencher: &mut Bencher) {
+    bencher.iter(|| {
+        let mut sum = 0;
 
-                for &n in STATIC_INT_ARRAY[..END].iter() {
-                    sum += n;
-                }
+        for &n in STATIC_INT_ARRAY[..END].iter() {
+            sum += n;
+        }
 
-                unsafe {
-                    RESULT = sum;
-                }
-            });
-        }),
-    );
+        sum
+    });
 }
 
-fn take(c: &mut Criterion) {
-    c.bench(
-        "iter_take",
-        Benchmark::new("take", move |b| {
-            b.iter(|| {
-                let mut sum = 0;
+fn take(bencher: &mut Bencher) {
+    bencher.iter(|| {
+        let mut sum = 0;
 
-                for &n in STATIC_INT_ARRAY.iter().take(END) {
-                    sum += n;
-                }
+        for &n in STATIC_INT_ARRAY.iter().take(END) {
+            sum += n;
+        }
 
-                unsafe {
-                    RESULT = sum;
-                }
-            });
-        }),
-    );
+        sum
+    });
 }
 
-criterion_group!(iter_take, range, range_skip, take);
+benchmark_group!(iter_take, range, range_skip, take);
 
-criterion_main!(iter_take);
+benchmark_main!(iter_take);

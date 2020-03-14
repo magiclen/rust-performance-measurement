@@ -1,9 +1,9 @@
 #[macro_use]
-extern crate criterion;
+extern crate bencher;
 
 use std::fmt::{self, Display, Formatter, Write};
 
-use criterion::{Criterion, Benchmark};
+use bencher::Bencher;
 
 struct MyWriteStr;
 
@@ -37,59 +37,39 @@ impl Display for MyWriteExt {
     }
 }
 
-fn write_str(c: &mut Criterion) {
+fn write_str(bencher: &mut Bencher) {
     let mut s = String::new();
 
-    c.bench(
-        "one_char_write",
-        Benchmark::new("write_str", move |b| {
-            b.iter(|| {
-                s.write_fmt(format_args!("{}", MyWriteStr)).unwrap();
-            });
-        }),
-    );
+    bencher.iter(|| {
+        s.write_fmt(format_args!("{}", MyWriteStr)).unwrap();
+    });
 }
 
-fn write_char(c: &mut Criterion) {
+fn write_char(bencher: &mut Bencher) {
     let mut s = String::new();
 
-    c.bench(
-        "one_char_write",
-        Benchmark::new("write_char", move |b| {
-            b.iter(|| {
-                s.write_fmt(format_args!("{}", MyWrite)).unwrap();
-            });
-        }),
-    );
+    bencher.iter(|| {
+        s.write_fmt(format_args!("{}", MyWrite)).unwrap();
+    });
 }
 
-fn write_str_ext(c: &mut Criterion) {
+fn write_str_ext(bencher: &mut Bencher) {
     let mut s = String::new();
 
-    c.bench(
-        "one_char_write",
-        Benchmark::new("write_str_ext", move |b| {
-            b.iter(|| {
-                s.write_fmt(format_args!("{}", MyWriteStrExt)).unwrap();
-            });
-        }),
-    );
+    bencher.iter(|| {
+        s.write_fmt(format_args!("{}", MyWriteStrExt)).unwrap();
+    });
 }
 
-fn write_char_ext(c: &mut Criterion) {
+fn write_char_ext(bencher: &mut Bencher) {
     let mut s = String::new();
 
-    c.bench(
-        "one_char_write",
-        Benchmark::new("write_char_ext", move |b| {
-            b.iter(|| {
-                s.write_fmt(format_args!("{}", MyWriteExt)).unwrap();
-            });
-        }),
-    );
+    bencher.iter(|| {
+        s.write_fmt(format_args!("{}", MyWriteExt)).unwrap();
+    });
 }
 
 
-criterion_group!(one_char_write, write_str, write_char, write_str_ext,write_char_ext );
+benchmark_group!(one_char_write, write_str, write_char, write_str_ext,write_char_ext );
 
-criterion_main!(one_char_write);
+benchmark_main!(one_char_write);

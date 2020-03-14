@@ -1,9 +1,7 @@
 #[macro_use]
-extern crate criterion;
+extern crate bencher;
 
-use criterion::{Criterion, Benchmark};
-
-static mut RESULT: u64 = 0;
+use bencher::Bencher;
 
 static STATIC_INT_ARRAY: [u64; 200] = [
     0x4AE0, 0xA570, 0x5268, 0xD260, 0xD950, 0x6AA8, 0x56A0, 0x9AD0, 0x4AE8, 0x4AE0,
@@ -28,44 +26,30 @@ static STATIC_INT_ARRAY: [u64; 200] = [
     0xD520, 0xDAA0, 0x6B50, 0x56D0, 0x4AE0, 0xA4E8, 0xA4D0, 0xD150, 0xD928, 0xD520,
 ];
 
-fn range(c: &mut Criterion) {
-    c.bench(
-        "iter_enumerate",
-        Benchmark::new("range", move |b| {
-            b.iter(|| {
-                let mut sum = 0;
+fn range(bencher: &mut Bencher) {
+    bencher.iter(|| {
+        let mut sum = 0;
 
-                for i in 0..STATIC_INT_ARRAY.len() {
-                    sum += i as u64 + STATIC_INT_ARRAY[i];
-                }
+        for i in 0..STATIC_INT_ARRAY.len() {
+            sum += i as u64 + STATIC_INT_ARRAY[i];
+        }
 
-                unsafe {
-                    RESULT = sum;
-                }
-            });
-        }),
-    );
+        sum
+    });
 }
 
-fn enumerate(c: &mut Criterion) {
-    c.bench(
-        "iter_enumerate",
-        Benchmark::new("enumerate", move |b| {
-            b.iter(|| {
-                let mut sum = 0;
+fn enumerate(bencher: &mut Bencher) {
+    bencher.iter(|| {
+        let mut sum = 0;
 
-                for (i, &n) in STATIC_INT_ARRAY.iter().enumerate() {
-                    sum += i as u64 + n;
-                }
+        for (i, &n) in STATIC_INT_ARRAY.iter().enumerate() {
+            sum += i as u64 + n;
+        }
 
-                unsafe {
-                    RESULT = sum;
-                }
-            });
-        }),
-    );
+        sum
+    });
 }
 
-criterion_group!(iter_skip_take, range, enumerate);
+benchmark_group!(iter_skip_take, range, enumerate);
 
-criterion_main!(iter_skip_take);
+benchmark_main!(iter_skip_take);

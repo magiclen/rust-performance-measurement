@@ -1,61 +1,41 @@
 #[macro_use]
-extern crate criterion;
+extern crate bencher;
 
-use criterion::{Criterion, Benchmark};
+use bencher::Bencher;
 
-fn push_str(c: &mut Criterion) {
+fn push_str(bencher: &mut Bencher) {
     let mut s = String::new();
 
-    c.bench(
-        "one_char_push",
-        Benchmark::new("push_str", move |b| {
-            b.iter(|| {
-                s.push_str("\n");
-            });
-        }),
-    );
+    bencher.iter(|| {
+        s.push_str("\n");
+    });
 }
 
-fn push(c: &mut Criterion) {
+fn push(bencher: &mut Bencher) {
     let mut s = String::new();
 
-    c.bench(
-        "one_char_push",
-        Benchmark::new("push", move |b| {
-            b.iter(|| {
-                s.push('\n');
-            });
-        }),
-    );
+    bencher.iter(|| {
+        s.push('\n');
+    });
 }
 
-fn push_str_ext(c: &mut Criterion) {
+fn push_str_ext(bencher: &mut Bencher) {
     let mut s = String::new();
 
-    c.bench(
-        "one_char_push",
-        Benchmark::new("push_str_ext", move |b| {
-            b.iter(|| {
-                s.push_str("哈");
-            });
-        }),
-    );
+    bencher.iter(|| {
+        s.push_str("哈");
+    });
 }
 
-fn push_ext(c: &mut Criterion) {
+fn push_ext(bencher: &mut Bencher) {
     let mut s = String::new();
 
-    c.bench(
-        "one_char_push",
-        Benchmark::new("push_ext", move |b| {
-            b.iter(|| {
-                s.push('哈');
-            });
-        }),
-    );
+    bencher.iter(|| {
+        s.push('哈');
+    });
 }
 
 
-criterion_group!(one_char_push, push_str, push, push_str_ext, push_ext);
+benchmark_group!(one_char_push, push_str, push, push_str_ext, push_ext);
 
-criterion_main!(one_char_push);
+benchmark_main!(one_char_push);

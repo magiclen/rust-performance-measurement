@@ -9,7 +9,7 @@ license = "MIT"
 [dependencies]
 
 [dev-dependencies]
-criterion = "0.2.6"
+bencher = "0.1.5"
 
 [[bench]]
 name = "atomic_mutex"

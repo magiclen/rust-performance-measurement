@@ -1,11 +1,10 @@
 #[macro_use]
-extern crate criterion;
+extern crate bencher;
 
-use criterion::{Criterion, Benchmark};
+use bencher::Bencher;
 
 static STATIC_INT_VALUE: u64 = 1;
 const CONST_INT_VALUE: u64 = 1;
-static mut RESULT: u64 = 0;
 
 static STATIC_INT_ARRAY: [u64; 200] = [
     0x4AE0, 0xA570, 0x5268, 0xD260, 0xD950, 0x6AA8, 0x56A0, 0x9AD0, 0x4AE8, 0x4AE0,
@@ -52,88 +51,60 @@ const CONST_INT_ARRAY: [u64; 200] = [
     0xD520, 0xDAA0, 0x6B50, 0x56D0, 0x4AE0, 0xA4E8, 0xA4D0, 0xD150, 0xD928, 0xD520,
 ];
 
-fn static_int_sum(c: &mut Criterion) {
-    c.bench(
-        "int_sum",
-        Benchmark::new("static_int_sum", move |b| {
-            b.iter(|| {
-                let mut sum = 0;
+fn static_int_sum(bencher: &mut Bencher) {
+    bencher.iter(|| {
+        let mut sum = 0;
 
-                for _ in 1..10000 {
-                    sum += STATIC_INT_VALUE;
-                    sum += STATIC_INT_VALUE;
-                }
+        for _ in 1..10000 {
+            sum += STATIC_INT_VALUE;
+            sum += STATIC_INT_VALUE;
+        }
 
-                unsafe {
-                    RESULT = sum;
-                }
-            });
-        }),
-    );
+        sum
+    });
 }
 
-fn const_int_sum(c: &mut Criterion) {
-    c.bench(
-        "int_sum",
-        Benchmark::new("const_int_sum", move |b| {
-            b.iter(|| {
-                let mut sum = 0;
+fn const_int_sum(bencher: &mut Bencher) {
+    bencher.iter(|| {
+        let mut sum = 0;
 
-                for _ in 1..10000 {
-                    sum += CONST_INT_VALUE;
-                    sum += CONST_INT_VALUE;
-                }
+        for _ in 1..10000 {
+            sum += CONST_INT_VALUE;
+            sum += CONST_INT_VALUE;
+        }
 
-                unsafe {
-                    RESULT = sum;
-                }
-            });
-        }),
-    );
+        sum
+    });
 }
 
-fn static_int_array_sum(c: &mut Criterion) {
-    c.bench(
-        "int_array_sum",
-        Benchmark::new("static_int_array_sum", move |b| {
-            b.iter(|| {
-                let mut sum = 0;
+fn static_int_array_sum(bencher: &mut Bencher) {
+    bencher.iter(|| {
+        let mut sum = 0;
 
-                for i in 1..200 {
-                    sum += STATIC_INT_ARRAY[i];
-                    sum += STATIC_INT_ARRAY[i];
-                }
+        for i in 1..200 {
+            sum += STATIC_INT_ARRAY[i];
+            sum += STATIC_INT_ARRAY[i];
+        }
 
-                unsafe {
-                    RESULT = sum;
-                }
-            });
-        }),
-    );
+        sum
+    });
 }
 
-fn const_int_array_sum(c: &mut Criterion) {
-    c.bench(
-        "int_array_sum",
-        Benchmark::new("const_int_array_sum", move |b| {
-            b.iter(|| {
-                let mut sum = 0;
+fn const_int_array_sum(bencher: &mut Bencher) {
+    bencher.iter(|| {
+        let mut sum = 0;
 
-                for i in 1..200 {
-                    sum += CONST_INT_ARRAY[i];
-                    sum += CONST_INT_ARRAY[i];
-                }
+        for i in 1..200 {
+            sum += CONST_INT_ARRAY[i];
+            sum += CONST_INT_ARRAY[i];
+        }
 
-                unsafe {
-                    RESULT = sum;
-                }
-            });
-        }),
-    );
+        sum
+    });
 }
 
 
-criterion_group!(int_sum, static_int_sum, const_int_sum);
-criterion_group!(array_sum, static_int_array_sum, const_int_array_sum);
+benchmark_group!(int_sum, static_int_sum, const_int_sum);
+benchmark_group!(array_sum, static_int_array_sum, const_int_array_sum);
 
-criterion_main!(int_sum, array_sum);
+benchmark_main!(int_sum, array_sum);
