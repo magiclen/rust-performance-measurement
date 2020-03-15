@@ -23,15 +23,15 @@ The result indicates that, with compiler optimization, const and static variable
 
 ## The Contains-Binary-Search Performance Measurement
 
-To compare the performance between the **contains** method and the **binary_search** for determining whether an element is in an sorted array.
+To compare the performance between the **contains** method and the **binary_search** method for determining whether an element is in an sorted array.
 
 ```bash
 cargo bench --bench contains_binary_search
 ```
 
-For elements whose type is primitive, if the length of an array is smaller than **32** or so, the **contains** method has better performance.
+For elements whose type is `char`, if the length of an array is smaller than **32** or so, the **contains** method has better performance.
 
-For non-primitive data type, it depends on how elements be compared with each other. The threshold should be smaller than **32** or so because the comparison between elements in primitive types is very fast.
+For other data types, it usually depends on how elements are compared with each other. The more complex the comparision, the more advantageous the **binary_search** method.
 
 ## The For-Iterator Performance Measurement
 
