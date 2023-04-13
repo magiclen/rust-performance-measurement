@@ -9,9 +9,11 @@ fn for_loop_stack(bencher: &mut Bencher) {
     let mut a = [0u8; ARRAY_SIZE];
 
     bencher.iter(|| {
+        #[allow(clippy::needless_range_loop)]
         for i in 0..ARRAY_SIZE {
             a[i] = 255;
         }
+        #[allow(clippy::needless_range_loop)]
         for i in 0..ARRAY_SIZE {
             a[i] = 0;
         }
@@ -24,9 +26,11 @@ fn for_loop_stack_slice(bencher: &mut Bencher) {
     let a: &mut [u8] = a.as_mut();
 
     bencher.iter(|| {
+        #[allow(clippy::needless_range_loop)]
         for i in 0..ARRAY_SIZE {
             a[i] = 255;
         }
+        #[allow(clippy::needless_range_loop)]
         for i in 0..ARRAY_SIZE {
             a[i] = 0;
         }
@@ -37,9 +41,11 @@ fn for_loop_heap(bencher: &mut Bencher) {
     let mut a = vec![0u8; ARRAY_SIZE];
 
     bencher.iter(|| {
+        #[allow(clippy::needless_range_loop)]
         for i in 0..ARRAY_SIZE {
             a[i] = 255;
         }
+        #[allow(clippy::needless_range_loop)]
         for i in 0..ARRAY_SIZE {
             a[i] = 0;
         }
@@ -52,9 +58,11 @@ fn for_loop_heap_slice(bencher: &mut Bencher) {
     let a: &mut [u8] = a.as_mut();
 
     bencher.iter(|| {
+        #[allow(clippy::needless_range_loop)]
         for i in 0..ARRAY_SIZE {
             a[i] = 255;
         }
+        #[allow(clippy::needless_range_loop)]
         for i in 0..ARRAY_SIZE {
             a[i] = 0;
         }

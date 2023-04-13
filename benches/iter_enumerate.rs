@@ -27,6 +27,7 @@ fn range(bencher: &mut Bencher) {
     bencher.iter(|| {
         let mut sum = 0;
 
+        #[allow(clippy::needless_range_loop)]
         for i in 0..STATIC_INT_ARRAY.len() {
             sum += i as u64 + STATIC_INT_ARRAY[i];
         }

@@ -7,6 +7,7 @@ fn push_str(bencher: &mut Bencher) {
     let mut s = String::new();
 
     bencher.iter(|| {
+        #[allow(clippy::single_char_add_str)]
         s.push_str("\n");
     });
 }
@@ -23,6 +24,7 @@ fn push_str_ext(bencher: &mut Bencher) {
     let mut s = String::new();
 
     bencher.iter(|| {
+        #[allow(clippy::single_char_add_str)]
         s.push_str("哈");
     });
 }

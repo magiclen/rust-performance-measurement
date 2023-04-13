@@ -4,7 +4,6 @@ extern crate bencher;
 extern crate random_integer;
 
 use bencher::Bencher;
-
 use random_integer::{rand, random_u8_with_rng, random_usize_with_rng};
 
 static NUMBERS: [char; 10] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -140,11 +139,7 @@ fn contains_is_non_sense(bencher: &mut Bencher) {
     bencher.iter(|| {
         let index = random_usize_with_rng(0, NONSENSE.len() * 2, &mut rng);
 
-        let needle = if index < NONSENSE.len() {
-            NONSENSE[index]
-        } else {
-            "1bigrep"
-        };
+        let needle = if index < NONSENSE.len() { NONSENSE[index] } else { "1bigrep" };
 
         NONSENSE.contains(&needle)
     });
@@ -156,11 +151,7 @@ fn binary_search_is_non_sense(bencher: &mut Bencher) {
     bencher.iter(|| {
         let index = random_usize_with_rng(0, NONSENSE.len() * 2, &mut rng);
 
-        let needle = if index < NONSENSE.len() {
-            NONSENSE[index]
-        } else {
-            "1bigrep"
-        };
+        let needle = if index < NONSENSE.len() { NONSENSE[index] } else { "1bigrep" };
 
         NONSENSE.binary_search(&needle).is_ok()
     });

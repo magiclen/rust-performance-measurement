@@ -75,6 +75,7 @@ fn static_int_array_sum(bencher: &mut Bencher) {
     bencher.iter(|| {
         let mut sum = 0;
 
+        #[allow(clippy::needless_range_loop)]
         for i in 1..200 {
             sum += STATIC_INT_ARRAY[i];
             sum += STATIC_INT_ARRAY[i];
@@ -88,6 +89,7 @@ fn const_int_array_sum(bencher: &mut Bencher) {
     bencher.iter(|| {
         let mut sum = 0;
 
+        #[allow(clippy::needless_range_loop)]
         for i in 1..200 {
             sum += CONST_INT_ARRAY[i];
             sum += CONST_INT_ARRAY[i];
